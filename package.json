@@ -1,12 +1,25 @@
 {
   "name": "async-operations-transaction",
   "version": "0.1.0",
-  "description": "",
+  "description": "A library that exports a function to execute a transaction of async operations",
   "main": "lib/index.js",
   "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "async",
+    "transaction"
+  ],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gemyero/async-operations-transaction.git"
+  },
+  "homepage": "https://github.com/gemyero/async-operations-transaction",
+  "devDependencies": {
+    "typescript": "^4.1.3"
+  }
 }

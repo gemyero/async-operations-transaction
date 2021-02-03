@@ -1,26 +1,34 @@
-import { OperationWithRollback } from './helpers/interfaces';
+interface OperationWithRollback {
+  asyncOperation: (...args: any[]) => Promise<any>;
+  rollback?: (...args: any[]) => Promise<any>;
+}
 
-export async function asyncOperationsTransaction(
+async function asyncOperationsTransaction(
   operationsWithRollback: OperationWithRollback[]
-) {
-  const successResults = await Promise.all(
+): Promise<[boolean, any[]]> {
+  const operationsResults = await Promise.all(
     operationsWithRollback.map((op) =>
-      op.asyncOperation.operation
-        .call(null, ...op.asyncOperation.args)
-        .catch((err: Error) => err)
+      op.asyncOperation().catch((err: Error) => err)
     )
   );
 
-  const needRollback = successResults.some((result) => result instanceof Error);
+  const needRollback = operationsResults.some(
+    (result) => result instanceof Error
+  );
 
   if (needRollback) {
-    const failureResults = await Promise.all(
-      operationsWithRollback.map((op) =>
-        op.rollback.operation.call(null, ...op.rollback.args)
-      )
+    const rollbackResults = await Promise.all(
+      operationsWithRollback.map((op) => {
+        if (op.rollback) {
+          return op.rollback();
+        }
+        return null;
+      })
     );
-    return [false, failureResults];
+    return [false, rollbackResults];
   }
 
-  return [true, successResults];
+  return [true, operationsResults];
 }
+
+export default asyncOperationsTransaction;
