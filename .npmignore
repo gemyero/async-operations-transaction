@@ -1,3 +1,7 @@
 node_modules
 src
 tests
+.eslintignore
+.eslintrc.js
+README.md
+tsconfig.json
