@@ -5,8 +5,18 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc",
+    "lint": "eslint --ext ts .",
+    "lint:fix": "eslint --ext ts --fix .",
     "prepublishOnly": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ava --verbose tests/**/*.test.ts"
+  },
+  "ava": {
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
   },
   "keywords": [
     "async",
@@ -20,6 +30,13 @@
   },
   "homepage": "https://github.com/gemyero/async-operations-transaction",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.14.2",
+    "@typescript-eslint/parser": "^4.14.2",
+    "ava": "^3.15.0",
+    "eslint": "^7.19.0",
+    "eslint-config-airbnb-typescript": "^12.0.0",
+    "eslint-plugin-import": "^2.22.1",
+    "ts-node": "^9.1.1",
     "typescript": "^4.1.3"
   }
 }

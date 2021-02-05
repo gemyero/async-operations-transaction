@@ -3,7 +3,8 @@
     "target": "es6",
     "lib": [
       "es6",
-      "DOM"
+      "DOM",
+      "ES2020.Promise"
     ],
     "outDir": "lib",
     "module": "CommonJS",
@@ -19,6 +20,7 @@
     "skipLibCheck": true
   },
   "include": [
-    "src"
+    "src",
+    "tests"
   ]
 }
