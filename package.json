@@ -1,6 +1,6 @@
 {
   "name": "async-operations-transaction",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A library that exports a function to execute a transaction of async operations",
   "main": "lib/index.js",
   "scripts": {
